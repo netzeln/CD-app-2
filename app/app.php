@@ -43,7 +43,7 @@
         $search_results = array();
         $found= (strtoupper($_POST['searchCDs']));
         $search_terms = explode(" ", $found);
-        var_dump($search_terms);
+        
 
         foreach($search_terms as $search_term){
             foreach($cds as $cd){

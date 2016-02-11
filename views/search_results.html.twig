@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="stylesheet" href="/css/styles.css" type="text.css">
         <meta charset="utf-8">
         <title></title>
     </head>
@@ -19,9 +20,10 @@
             {% endfor %}
         {% endif %}
 
-        {% if cds is empty %}
+        {% if results is empty %}
             <h2> No cds match your search term</h2>
-            <h3><a href="/">Return Home</a></h3>
+
         {% endif %}
+        <h3><a href="/">Return Home</a></h3>
     </body>
 </html>
