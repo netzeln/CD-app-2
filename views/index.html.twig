@@ -8,6 +8,14 @@
     <body>
         <h1>CD Collection</h1>
         <h3><a href="/add_CD">Add some CDS to your collection</a></h3>
+        <h3><a href="/delete">Delete and get an iPod</a></h3>
+
+        <form  action="/search" method="post">
+            
+            <input type="text" name="searchCDs" id="searchCDs">
+            <button type="submit">Search for an Artist</button>
+
+        </form>
 
         {% if cds is not empty %}
             {% for cd in cds %}
@@ -25,7 +33,7 @@
 
         {% if cds is empty %}
             <h2> You must have an iPod</h2>
-            <h3><a href="/add_cd">Add some CDS to your collection</a></h3>
+            <h3><a href="/add_CD">Add some CDS to your collection</a></h3>
         {% endif %}
     </body>
 </html>
