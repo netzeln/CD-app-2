@@ -42,14 +42,17 @@
         $cds= $_SESSION['list_of_CDs'];
         $search_results = array();
         $found= (strtoupper($_POST['searchCDs']));
+        $search_terms = explode(" ", $found);
+        var_dump($search_terms);
 
-        foreach($cds as $cd){
-
-            if (strpos(strtoupper($cd->getArtist()), $found) !== false){
-                array_push($search_results, $cd);
+        foreach($search_terms as $search_term){
+            foreach($cds as $cd){
+                if (strpos(strtoupper($cd->getArtist()), $search_term) !== false)
+                {
+                    array_push($search_results, $cd);
+                }
             }
         }
-
         return $app['twig']->render('search_results.html.twig', array('results'=>$search_results));
     });
 
