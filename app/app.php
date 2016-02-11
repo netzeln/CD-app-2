@@ -2,9 +2,20 @@
     require_once __DIR__."/../vendor/autoload.php";
     require_once __DIR__."/../src/Cd.php";
 
+    session_start();
+    if(empty($_SESSION['list_of_CDs'])){
+        $_SESSION['list_of_CDs'] = array();
+    }
+
+
     $app = new Silex\Application();
 
-    $app->get("/", function() {
+    $app->register(new Silex\Provider\TwigServiceProvider(), array('twig.path'=>__DIR__.'/../views'
+    ));
+
+
+
+    $app->get("/", function() use ($app) {
       $first_cd = new CD("The Birthday Concert", "Jaco Pastorius", "img/birthday.jpg");
       $second_cd = new CD("Blackstar", "David Bowie", "img/blackstar.jpg");
       $third_cd = new CD("Bright Size Life", "Pat Metheney", "img/bright.jpg");
@@ -12,21 +23,10 @@
       $fifth_cd = new  CD("Ten", "Pearl Jam", "img/ten.jpg", 5);
       $cds = array($first_cd, $second_cd, $third_cd, $fourth_cd, $fifth_cd);
 
-      $cd_list = "";
-      foreach ($cds as $album) {
-          $cd_list = $cd_list . "<div class='row'>
-              <div class='col-md-6'>
-                  <img src=" . $album->getCoverArt() . ">
-              </div>
-              <div class='col-md-6'>
-                  <p>" . $album->getTitle() . "</p>
-                  <p>" . $album->getArtist() . "</p>
-                  <p>$" . $album->getPrice() . "</p>
-              </div>
-          </div>
-          ";
-      }
-        return $cd_list;
+      $cd_list = $cds;
+
+
+        return $app['twig']->render('index.html.twig', array('cds'=> $cd_list));
     });
 
     return $app;
