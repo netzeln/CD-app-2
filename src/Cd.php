@@ -47,6 +47,25 @@
             array_push($_SESSION['list_of_CDs'], $this);
         }
 
+        static function searchArtist($cds, $search_string)
+        {
+            $search_results = array();
+            $found= (strtoupper($search_string));
+            $search_terms = explode(" ", $found);
+
+
+            foreach($search_terms as $search_term){
+                foreach($cds as $cd){
+                    if (strpos(strtoupper($cd->getArtist()), $search_term) !== false)
+                    {
+                        array_push($search_results, $cd);
+                    }
+                }
+            }
+
+            return $search_results;
+        }
+
         static function getAll()
         {
             return $_SESSION['list_of_CDs'];
