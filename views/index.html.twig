@@ -2,10 +2,13 @@
 <html>
     <head>
         <meta charset="utf-8">
+        <link rel="stylesheet" href="/css/styles.css" type="text.css">
         <title>Your CD Collection</title>
     </head>
     <body>
-        <h1>hello</h1>
+        <h1>CD Collection</h1>
+        <h3><a href="/add_CD">Add some CDS to your collection</a></h3>
+
         {% if cds is not empty %}
             {% for cd in cds %}
                 <div class='row'>
